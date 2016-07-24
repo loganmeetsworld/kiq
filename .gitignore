@@ -1,0 +1,11 @@
+*.gem
+.rvmrc
+.bundle
+.config
+Gemfile.lock
+coverage
+doc/
+lib/bundler/man
+pkg
+rdoc
+tmp
