@@ -3,7 +3,7 @@ require 'optparse'
 module Minikiq
   class CLI
     def run
-      puts "test"
+      "test"
     end
   end
 end
