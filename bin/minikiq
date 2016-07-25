@@ -1,5 +1,6 @@
+
 #!/usr/bin/env ruby
 
 require 'minikiq'
 
-Minikiq::CLI::Run.new.run
+Minikiq::CLI.new.run

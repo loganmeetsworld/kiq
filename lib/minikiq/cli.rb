@@ -1,5 +1,9 @@
 require 'optparse'
 
-require 'minikiq/cli/project'
-require 'minikiq/cli/backer'
-require 'minikiq/cli/contribution'
+module Minikiq
+  class CLI
+    def run
+      puts "test"
+    end
+  end
+end
