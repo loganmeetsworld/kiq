@@ -1,4 +1,4 @@
-require "minikiq/cli"
+require "minikiq/run"
 require "minikiq/version"
 
 module Minikiq
