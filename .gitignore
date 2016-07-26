@@ -9,3 +9,4 @@ lib/bundler/man
 pkg
 rdoc
 tmp
+.minikiq
