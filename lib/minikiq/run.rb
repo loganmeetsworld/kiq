@@ -14,9 +14,6 @@ module Minikiq
         load_projects
       end
 
-      ####
-      #### PERFORM AND HANDLE USER INPUT
-      ####
       def perform
         user_input      = ARGV
         primary_command = user_input[0]
@@ -54,9 +51,6 @@ module Minikiq
         end
       end
 
-      ####
-      #### COMMANDS
-      ####
       def add(project)
         type = project[0]
         name = project[1]
@@ -91,7 +85,7 @@ module Minikiq
         check_goal(project)
         puts "BACKERS:"
         project.backers.each do |backer|
-          puts "Backer #{backer[1].name}, Amount: $#{backer[1].amount}, Credit Card: #{backer[0]}"
+          puts "Backer #{backer[1].name}, Amount: $#{backer[1].amount}"
         end
       end
 
@@ -99,7 +93,7 @@ module Minikiq
         @projects.each do |project|
           project[1].backers.each do |backer|
             if backer[1].name == backer_name
-              puts "Backed #{project[1].name} for $#{backer[1].amount} dollars on credit card number #{backer[0]}."
+              puts "Backed #{project[1].name} for $#{backer[1].amount} dollars"
             end
           end
         end
