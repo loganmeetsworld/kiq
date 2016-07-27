@@ -45,6 +45,9 @@ Backed Awesome_Sauce for $50 dollars.
 ```
 
 ## Technology/Dependencies
+### Let's talk about assumptions
+* I want to recognize that I made a couple of assumptions in this process. The first assumption was that a user downloading the gem was using a Mac. 
+
 ### Why ruby, why a gem (and the downsides to those choices)
 ### To depend, or not to depend? That is the question.
 ### Serialization data storage

@@ -1,5 +1,3 @@
-require 'luhn'
-
 module Minikiq
   module CLI
     class Backer
@@ -66,7 +64,7 @@ module Minikiq
       end
 
       def self.check_card_luhn_10(credit_card)
-        if Luhn.valid?(credit_card)
+        if self.luhn_valid?(credit_card)
           return true
         else
           puts "ERROR: That card fails Luhn-10!"
@@ -84,13 +82,38 @@ module Minikiq
       end
 
       def self.check_card_numeric(credit_card)
-        if Float(credit_card) != nil
+        if credit_card.match(/^\d+$/)
           return true
         else
           puts "ERROR: That card isn't purely numeric!"
           return false
         end
       end
+
+      private
+
+      def self.luhn_valid?(credit_card)
+        number = credit_card.reverse
+        sum = 0
+        count = 0
+
+        number.each_char do |char|
+          n = char.to_i
+          if count.odd?
+            n *= 2
+          end
+
+          if n >= 10
+            n = 1 + (n - 10)
+          end
+
+          sum += n
+          count += 1
+        end
+
+        (sum % 10) == 0
+      end
+
     end
   end
 end

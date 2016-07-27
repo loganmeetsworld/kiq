@@ -67,7 +67,7 @@ module Minikiq
 
       def back(type, backer_name, project_name, credit_card, amount)
         project = @projects[project_name]
-        if Backer.validate_project_exists(project) && Backer.validate_card(project, credit_card) && Backer.validate_backer_name(backer_name) && Backer.validate_amount(amount)
+        if Backer.validate_project_exists(project) && Backer.validate_card(project, credit_card) && Backer.validate_backer_name(backer_name) && Backer.check_amount_dollar_sign(amount)
           backer = Backer.new(backer_name, credit_card, amount)
           project.backers[credit_card] = backer
           update_goal(project, amount)
@@ -80,6 +80,7 @@ module Minikiq
 
       def list(project_name)
         project = Project.all_offspring.find { |p| p.name == project_name }
+        puts project.backers.values.first.inspect
         puts "Project Name: #{project.name}"
         puts "Amount Remaining: $#{project.amount}"
         check_goal(project)
@@ -126,7 +127,7 @@ module Minikiq
       end
 
       def check_goal(project)
-        if project.amount <= 0
+        if project.amount.to_i <= 0
           puts "Reached goal!"
         end
       end

@@ -21,6 +21,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec', '~> 2.14'
   gem.add_development_dependency 'rake', '~> 10.1'
   gem.add_development_dependency 'simplecov', '~> 0.12'
-
-  gem.add_runtime_dependency 'luhn-ruby', '~> 1.0'
 end

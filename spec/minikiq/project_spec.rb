@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Minikiq::CLI::Project do
+
   describe '#self.all_offspring' do
     it 'returns all the instances of project class' do
       Minikiq::CLI::Project.new('Test', '300', {})
