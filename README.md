@@ -51,5 +51,5 @@ Backed Awesome_Sauce for $50 dollars.
 
 ## To Do (if only there was more time)
 A lot of things.
-* Make it look better
-* 
+* Make it look prettier, research UI gems like highline and colorize and look for ways to implement them.
+* Refactor the specs. There's a lot of repetition there.

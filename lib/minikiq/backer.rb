@@ -10,15 +10,6 @@ module Minikiq
         @name = name
         @amount = amount
         @credit_card = credit_card
-        @@instance_collector << self
-      end
-
-      def self.all_offspring
-        @@instance_collector
-      end
-
-      def self.validate_card(project, credit_card)
-        return self.check_card_uniqueness(project, credit_card) && self.check_card_luhn_10(credit_card) && self.check_card_length(credit_card) && self.check_card_numeric(credit_card) && self.check_name_length(name)
       end
 
       def self.validate_project_exists(project)
@@ -30,11 +21,15 @@ module Minikiq
         end
       end
 
+      def self.validate_card(project, credit_card)
+        return self.check_card_uniqueness(project, credit_card) && self.check_card_luhn_10(credit_card) && self.check_card_length(credit_card) && self.check_card_numeric(credit_card) && self.check_name_length(name)
+      end
+
       def self.validate_backer_name(name)
         return self.check_name_characters(name) && self.check_name_length(name)
       end
 
-      def self.validate_amount(amount)
+      def self.check_amount_dollar_sign(amount)
         if !amount.include?('$')
           return true
         else
@@ -48,6 +43,7 @@ module Minikiq
           return true
         else
           puts "ERROR: Backer name may only use alphanumeric characters, underscores, and dashes."
+          return false
         end
       end
 
@@ -56,6 +52,7 @@ module Minikiq
           return true
         else
           puts "ERROR: Backer name must be between 4 and 20 characters."
+          return false
         end
       end
 
