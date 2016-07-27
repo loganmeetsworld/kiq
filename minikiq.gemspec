@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.version       = Minikiq::VERSION
   gem.authors       = ['Logan McDonald']
   gem.email         = ['logan@logancodes.it']
-  gem.description   = %q{Mini Kickstarter Command Line Interface}
+  gem.description   = %q{Use this command line tool to back Kickstarter campaigns.}
   gem.summary       = %q{Mini Kickstarter Command Line Interface}
   gem.homepage      = 'https://github.com/loganmeetsworld/minikiq'
 

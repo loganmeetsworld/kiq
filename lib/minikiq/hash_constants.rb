@@ -1,3 +1,5 @@
+require 'minikiq/version'
+
 module Minikiq
   TITLE_HASH = {
     'NAME' => "Minikiq: a command line interface for backing Kickstarter projects.\n\n",
