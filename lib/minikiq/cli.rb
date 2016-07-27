@@ -1,4 +1,3 @@
-require 'optparse'
 require 'yaml'
 
 require 'minikiq/cli/project'
@@ -15,13 +14,24 @@ module Minikiq
       end
 
       def add(project)
-        if @projects[project[1]].nil?
-          @projects[project[1]] = Project.new(project)
-          save
-          puts "Just added #{@projects[project[1]]}!"
+        if project_exists?(project)
+          puts "ERROR: That project already exists!\n\n"
+          help
         else
-          puts "That project already exists!"
+          display_and_add(project)
         end
+      end
+
+      def display_and_add(project)
+        name = project[1]
+        amount = project[2]
+        @projects[name] = Project.new(name, amount)
+        save
+        puts "Added Project: #{name}!"
+      end
+
+      def project_exists?(project)
+        !@projects[project[1]].nil?
       end
 
 
