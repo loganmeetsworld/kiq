@@ -14,6 +14,55 @@ module Minikiq
       def self.all_offspring
         @@instance_collector
       end
+
+      def self.validate_project(project, projects)
+        type = project[0]
+        name = project[1]
+        amount = project[2]
+
+        return self.project_exists?(project, projects) && self.check_amount_dollar_sign(amount) && self.check_input_length(project) && self.check_name_characters(type, name) && self.check_name_length(type, name)
+      end
+
+      def self.project_exists?(project, projects)
+        if projects[project[1]].nil?
+          return true
+        else
+          puts "ERROR: Project already exists."
+        end
+      end
+
+      def self.check_amount_dollar_sign(amount)
+        if !amount.include?('$')
+          return true
+        else
+          puts "ERROR: #{type.capitalize} amount must not contain the '$' character or any other alphanumeric characters. Numbers only."
+          return false
+        end
+      end
+
+      def self.check_input_length(input)
+        if input.length == 3
+          return true
+        else
+          puts "ERROR: A project must have two arguments."
+        end
+      end
+
+      def self.check_name_characters(type, name)
+        if name.scan(/[^\w-]/).empty?
+          return true
+        else
+          puts "ERROR: #{type.capitalize} name may only use alphanumeric characters, underscores, and dashes."
+        end
+      end
+
+      def self.check_name_length(type, name)
+        if name.length >= 4 && name.length <= 20
+          return true
+        else
+          puts "ERROR: #{type.capitalize} name must be between 4 and 20 characters."
+        end
+      end
     end
   end
 end

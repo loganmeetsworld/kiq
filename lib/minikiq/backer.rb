@@ -1,0 +1,99 @@
+require 'luhn'
+
+module Minikiq
+  module CLI
+    class Backer
+      @@instance_collector = []
+      attr_accessor :name, :credit_card, :amount
+
+      def initialize(name, credit_card, amount)
+        @name = name
+        @amount = amount
+        @credit_card = credit_card
+        @@instance_collector << self
+      end
+
+      def self.all_offspring
+        @@instance_collector
+      end
+
+      def self.validate_card(project, credit_card)
+        return self.check_card_uniqueness(project, credit_card) && self.check_card_luhn_10(credit_card) && self.check_card_length(credit_card) && self.check_card_numeric(credit_card) && self.check_name_length(name)
+      end
+
+      def self.validate_project_exists(project)
+        if !project.nil?
+          return true
+        else
+          puts "ERROR: Project doesn't exist."
+          return false
+        end
+      end
+
+      def self.validate_backer_name(name)
+        return self.check_name_characters(name) && self.check_name_length(name)
+      end
+
+      def self.validate_amount(amount)
+        if !amount.include?('$')
+          return true
+        else
+          puts "ERROR: Backing amount must not contain the '$' character or any other alphanumeric characters. Numbers only."
+          return false
+        end
+      end
+
+      def self.check_name_characters(name)
+        if name.scan(/[^\w-]/).empty?
+          return true
+        else
+          puts "ERROR: Backer name may only use alphanumeric characters, underscores, and dashes."
+        end
+      end
+
+      def self.check_name_length(name)
+        if name.length >= 4 && name.length <= 20
+          return true
+        else
+          puts "ERROR: Backer name must be between 4 and 20 characters."
+        end
+      end
+
+      def self.check_card_uniqueness(project, credit_card)
+        if project.backers[credit_card].nil?
+          return true
+        else
+          puts "ERROR: That card has already been added by another user!"
+          return false
+        end
+      end
+
+      def self.check_card_luhn_10(credit_card)
+        if Luhn.valid?(credit_card)
+          return true
+        else
+          puts "ERROR: That card fails Luhn-10!"
+          return false
+        end
+      end
+
+      def self.check_card_length(credit_card)
+        if credit_card.length <= 19
+          return true
+        else
+          puts "ERROR: That card isn't less than or equal to 19 numbers!"
+          return false
+        end
+      end
+
+      def self.check_card_numeric(credit_card)
+        if Float(credit_card) != nil
+          return true
+        else
+          puts "ERROR: That card isn't purely numeric!"
+          return false
+        end
+      end
+    end
+  end
+end
