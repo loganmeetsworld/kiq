@@ -10,6 +10,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Use this command line tool to back Kickstarter campaigns.}
   gem.summary       = %q{Mini Kickstarter Command Line Interface}
   gem.homepage      = 'https://github.com/loganmeetsworld/minikiq'
+  gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
   gem.files         -= gem.files.grep(%r{^\.})
@@ -19,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rspec', '~> 2.14'
   gem.add_development_dependency 'rake', '~> 10.1'
-  gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'simplecov', '~> 0.12'
 
-  gem.add_runtime_dependency 'luhn-ruby'
+  gem.add_runtime_dependency 'luhn-ruby', '~> 1.0'
 end
