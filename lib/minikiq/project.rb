@@ -20,7 +20,7 @@ module Minikiq
         name = project[1]
         amount = project[2]
 
-        return self.project_exists?(project, projects) && self.check_amount_dollar_sign(amount) && self.check_input_length(project) && self.check_name_characters(type, name) && self.check_name_length(type, name)
+        return self.check_input_length(project) && self.project_exists?(project, projects) && self.check_amount_dollar_sign(amount) && self.check_name_characters(type, name) && self.check_name_length(type, name)
       end
 
       def self.project_exists?(project, projects)
@@ -28,6 +28,7 @@ module Minikiq
           return true
         else
           puts "ERROR: Project already exists."
+          return false
         end
       end
 
@@ -35,7 +36,7 @@ module Minikiq
         if !amount.include?('$')
           return true
         else
-          puts "ERROR: #{type.capitalize} amount must not contain the '$' character or any other alphanumeric characters. Numbers only."
+          puts "ERROR: Project amount must not contain the '$' character or any other alphanumeric characters. Numbers only."
           return false
         end
       end
@@ -45,22 +46,25 @@ module Minikiq
           return true
         else
           puts "ERROR: A project must have two arguments."
+          return false
         end
       end
 
-      def self.check_name_characters(type, name)
+      def self.check_name_characters(name)
         if name.scan(/[^\w-]/).empty?
           return true
         else
-          puts "ERROR: #{type.capitalize} name may only use alphanumeric characters, underscores, and dashes."
+          puts "ERROR: Project name may only use alphanumeric characters, underscores, and dashes."
+          return false
         end
       end
 
-      def self.check_name_length(type, name)
+      def self.check_name_length(name)
         if name.length >= 4 && name.length <= 20
           return true
         else
-          puts "ERROR: #{type.capitalize} name must be between 4 and 20 characters."
+          puts "ERROR: Project name must be between 4 and 20 characters."
+          return false
         end
       end
     end
