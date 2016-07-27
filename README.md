@@ -1,13 +1,10 @@
-[![Build Status](https://travis-ci.org/loganmeetsworld/minikiq.svg?branch=master)](https://travis-ci.org/loganmeetsworld/minikiq)
-[![Gem Version](https://badge.fury.io/rb/minikiq.svg)](https://badge.fury.io/rb/minikiq)
-[![Code Climate][CC img]][Code Climate]
-[![Coverage Status][CS img]][Coverage Status]
 
-# Minikiq
+Minikiq [![Build Status](https://travis-ci.org/loganmeetsworld/minikiq.svg?branch=master)](https://travis-ci.org/loganmeetsworld/minikiq) [![Gem Version](https://badge.fury.io/rb/minikiq.svg)](https://badge.fury.io/rb/minikiq)
+=========
+
+## Summary
 A [gem](https://rubygems.org/gems/minikiq).
 
-[Code Climate]: https://codeclimate.com/github/loganmeetsworld/minikiq
-[Coverage Status]: https://coveralls.io/r/loganmeetsworld/minikiq
+## Technology/Dependencies
 
-[CC img]: https://codeclimate.com/github/loganmeetsworld/minikiq.png
-[CS img]: https://coveralls.io/repos/loganmeetsworld/minikiq/badge.png?branch=master
+## To Do (if only there was more time)
