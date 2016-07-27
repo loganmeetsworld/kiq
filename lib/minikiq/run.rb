@@ -1,6 +1,6 @@
 require 'yaml'
 require 'minikiq/project'
-require 'minikiq/hash_constants'
+require 'minikiq/constants'
 require 'minikiq/display'
 require 'minikiq/backer'
 
