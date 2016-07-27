@@ -1,4 +1,4 @@
-require 'minikiq/version'
+require 'minikiq/helpers/version'
 
 module Minikiq
   TITLE_HASH = {

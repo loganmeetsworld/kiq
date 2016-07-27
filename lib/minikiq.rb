@@ -1,6 +1,8 @@
 require 'minikiq/run'
-require 'minikiq/version'
-require 'minikiq/hash_constants'
+require 'minikiq/project'
+require 'minikiq/backer'
+require 'minikiq/helpers/constants'
+require 'minikiq/helpers/display'
 
 module Minikiq
 end

@@ -1,8 +1,8 @@
 require 'yaml'
 require 'minikiq/project'
-require 'minikiq/constants'
-require 'minikiq/display'
 require 'minikiq/backer'
+require 'minikiq/helpers/constants'
+require 'minikiq/helpers/display'
 
 module Minikiq
   FILE = File.expand_path('.minikiq')
@@ -98,8 +98,6 @@ module Minikiq
           end
         end
       end
-
-      private
 
       def file
         @file ||= File.exist?(FILE) ? FILE : '.minikiq'
