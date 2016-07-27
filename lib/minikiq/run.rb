@@ -88,6 +88,7 @@ module Minikiq
         project = Project.all_offspring.find { |p| p.name == project_name }
         puts "Project Name: #{project.name}"
         puts "Amount Remaining: $#{project.amount}"
+        check_goal(project)
         puts "BACKERS:"
         project.backers.each do |backer|
           puts "Backer #{backer[1].name}, Amount: $#{backer[1].amount}, Credit Card: #{backer[0]}"
