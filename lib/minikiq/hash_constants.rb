@@ -10,4 +10,8 @@ module Minikiq
     'back' => ['     - Back a project', '[backer name] [project name] [credit card number] [backing amount]'],
     'backers' => ['  - Display a list of projects that a backer has backed and amounts backed', '[backer name]']
   }
+
+  SPACES = '    '
+
+  GLOBAL_COMMAND = "--help   - Get help for a command\n\n"
 end

@@ -1,7 +1,7 @@
 require 'yaml'
-
-require 'minikiq/cli/project'
+require 'minikiq/project'
 require 'minikiq/hash_constants'
+require 'minikiq/display'
 
 module Minikiq
   FILE = File.expand_path('.minikiq')
@@ -12,6 +12,64 @@ module Minikiq
         load_file
         load_projects
       end
+
+      def file
+        @file ||= File.exist?(FILE) ? FILE : '.minikiq'
+      end
+
+      def load_projects
+        unless File.zero?(@file)
+          contents = YAML.load_file(@file)
+          contents.keys.each do |d|
+            @projects[d] = Project.new(contents[d].name, contents[d].amount, contents[d].backers)
+          end
+        end
+      end
+
+      def save
+        File.open(file, "w") {|f| f.write(@projects.to_yaml) }
+      end
+
+      def load_file
+        File.exist?(file) ? return : save
+      end
+
+      def perform
+        user_input      = ARGV
+        primary_command = user_input[0]
+        valid_commands  = ['project', 'list', 'back', 'backer']
+
+        case primary_command
+        when *valid_commands
+          handle(user_input)
+        when '-v'
+          puts Minikiq::VERSION
+        when nil
+          Minikiq::Display.help
+        when '--help'
+          Minikiq::Display.help
+        else
+          puts "Unknown command: '#{user_input}'." unless input == '-h'
+          Minikiq::Display.help
+        end
+      end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       def add(project)
         if project_exists?(project)
@@ -34,6 +92,24 @@ module Minikiq
         !@projects[project[1]].nil?
       end
 
+      def check_luhn_10(card)
+        digits = card.chars.map(&:to_i)
+        check = digits.pop
+
+        sum = digits.reverse.each_slice(2).flat_map do |x, y|
+          [(x * 2).divmod(10), y || 0]
+        end.flatten.inject(:+)
+
+        (10 - sum % 10) == check
+      end
+
+      def check_card_length(card)
+        return card.length <= 19
+      end
+
+      def check_card_numeric(card)
+        Float(card) != nil rescue false
+      end
 
       def back(project)
         backer_name = project[1]
@@ -41,17 +117,21 @@ module Minikiq
         credit_card = project[3]
         amount = project[4]
         project = @projects[project_name]
-        puts project.inspect
-        project.amount = project.amount.to_i - amount.to_i
-        project.backers[credit_card] = [backer_name, project_name, amount]
+        if project.backers[credit_card].nil?
+          project.backers[credit_card] = [backer_name, project_name, amount]
+        else
+          return "ERROR: That card has already been added by another user!"
+        end
+
+        project.amount = project.amount.to_f - amount.to_f
+
+        if project.amount <= 0
+          puts "Reached goal!"
+        end
+
         save
       end
 
-      #
-      # Takes a project name
-      # Print all the backers for a given project
-      # Returns nothing
-      #
       def list_projects(project_name)
         project = Project.all_offspring.find { |p| p.name == project_name }
         puts "Project Name: #{project.name}"
@@ -71,69 +151,11 @@ module Minikiq
         end
       end
 
-      #
-      # Access the project list file
-      # Returns file path
-      #
-      def file
-        @file ||= File.exist?(FILE) ? FILE : '.minikiq'
-      end
-
-      #
-      # Loads existing projects from yaml to @projects
-      # Returns @projects hash.
-      #
-
-      def load_projects
-        unless File.zero?(@file)
-          contents = YAML.load_file(@file)
-          contents.keys.each do |d|
-            @projects[d] = Project.new(contents[d].name, contents[d].amount, contents[d].backers)
-          end
-        end
-      end
-
-      #
-      # Saves projects hash in yaml
-      # Returns nothing
-      #
-      def save
-        File.open(file, "w") {|f| f.write(@projects.to_yaml) }
-      end
-
-      #
-      # Check if file exists, save if not
-      # Returns nothing
-      #
-      def load_file
-        File.exist?(file) ? return : save
-      end
-
-      def perform
-        input = ARGV
-        first_word = input[0]
-        valid_input = ['project', 'list', 'back', 'backer']
-
-        case first_word
-        when *valid_input
-          handle(input)
-        when '-v'
-          puts Minikiq::VERSION
-        when nil
-          help
-        when '--help'
-          help
-        else
-          puts "Unknown command: '#{input}'." unless input == '-h'
-          help
-        end
-      end
-
       def handle(input)
         case input[0]
         when "project"
           if input[-1] == '--help'
-            return command_help('project')
+            return Minikiq::Display.command_help('project')
           end
           if validate_project(input) == true
             add(input)
@@ -152,11 +174,11 @@ module Minikiq
       def validate_project(input)
         check_input_length(input)
         if check_input_length(input)
-          check_name_characters(input[1])
-          check_name_length(input[1])
-          check_amount(input[2])
+          check_name_characters(input[0], input[1])
+          check_name_length(input[0], input[1])
+          check_amount(input[0], input[2])
         else
-          command_help(input[0])
+          Minikiq::Display.command_help(input[0])
         end
       end
 
@@ -168,54 +190,32 @@ module Minikiq
         end
       end
 
-      def check_name_characters(name)
+      def check_name_characters(type, name)
         if name.scan(/[^\w-]/).empty?
           return true
         else
-          puts 'ERROR: Project name may only use alphanumeric characters, underscores, and dashes.'
+          puts "ERROR: #{type} name may only use alphanumeric characters, underscores, and dashes."
           return false
         end
       end
 
-      def check_name_length(name)
+      def check_name_length(type, name)
         if name.length >= 4 && name.length <= 20
           return true
         else
-          puts 'Project name must be between 4 and 20 characters.'
+          puts "#{type} name must be between 4 and 20 characters."
         end
       end
 
-      def check_amount(amount)
+      def check_amount(type, amount)
         if !amount.include?('$')
           return true
         else
-          puts 'Project amount must not contain the "$" character or any other alphanumeric characters. Numbers only.'
+          puts "#{type} amount must not contain the '$' character or any other alphanumeric characters. Numbers only."
           return false
         end
       end
 
-      def help
-        Minikiq::TITLE_HASH.keys.each do |key|
-          puts key
-          puts '    ' + Minikiq::TITLE_HASH[key]
-        end
-
-        puts 'GLOBAL OPTIONS'
-        puts "    --help   - Get help for a command\n\n"
-
-        puts "COMMANDS"
-        Minikiq::COMMAND_HASH.keys.each do |key|
-          puts '    ' + key + Minikiq::COMMAND_HASH[key][0]
-        end
-        puts "\n"
-      end
-
-      def command_help(command)
-        puts 'NAME'
-        puts '    ' + Minikiq::TITLE_HASH['NAME']
-        puts 'SYNOPSIS'
-        puts '    ' + command + '    ' + Minikiq::COMMAND_HASH[command][1]
-      end
     end
   end
 end
