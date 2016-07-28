@@ -42,9 +42,6 @@ module Kiq
       def self.project_does_not_exist?(project, projects)
         if projects[project[1]].nil?
           return true
-        else
-          puts "ERROR: Project already exists."
-          return false
         end
       end
 
