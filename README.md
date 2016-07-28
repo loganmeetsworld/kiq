@@ -69,7 +69,7 @@ Backed Awesome_Sauce for $50 dollars.
 * I spent most of the planning for this project thinking about whether I should use a gem like [GLI](https://github.com/davetron5000/gli), or build out the whole app myself. I ended up choosing to go without a dependency on another package. I thought deeply about this. Probably too deeply. I weighed ["Not Built Here" Syndrome](http://www.richard-banks.org/2007/07/built-here-syndrome.html) with having to rely on how another person packaged up the CLI app. I ended up siding with less dependencies. I took some tips from the UI in a couple apps, and built out the rest of it myself, which worked well. I watched [Dave Copeland's talk on CLI apps](https://www.youtube.com/watch?v=eYk2Otz4X4I) and while I like Methadone and GLI, I don't particularly like Cucumber, which the built in dependency on Aruba was heavily trying to get me to use. If I were building a bigger project, however, and needed a more stream lined UI, it looks like GLI, Methadone, Highline, and Main are all great gems to use for it.
 
 ## Architecture Choices
-### Serialization For Storage
+### Serialization
 I used serialization with a yaml file for storage and made it human-readbale. This helped me not only organize the data but visualize it as it updated. If this project were bigger and had more objects I would want to use a relational database. However, with just two models, Projects and Backers, a hash to handle the Backers worked out well. It also really helped to be able to read the collection of projects from the file. 
 
 ### Hash Useage
