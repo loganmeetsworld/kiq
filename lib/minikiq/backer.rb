@@ -3,6 +3,7 @@ module Minikiq
     # Hosts logic for the backer object
     class Backer
       @@instance_collector = []
+      # Allows access to name, credit_card, and amount
       attr_accessor :name, :credit_card, :amount
 
       # @param name [String]

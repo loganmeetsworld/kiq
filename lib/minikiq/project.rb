@@ -3,6 +3,7 @@ module Minikiq
     # Hosts logic for the backer object
     class Project
       @@instance_collector = []
+      # Allows access to name, amount, and backers
       attr_accessor :name, :amount, :backers
 
       # @param name [String]
