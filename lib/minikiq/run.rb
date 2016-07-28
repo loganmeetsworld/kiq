@@ -14,8 +14,7 @@ module Minikiq
         load_projects
       end
 
-      def perform
-        user_input      = ARGV
+      def perform(user_input)
         primary_command = user_input[0]
         valid_commands  = ['project', 'list', 'back', 'backer']
 
@@ -79,14 +78,18 @@ module Minikiq
       end
 
       def list(project_name)
-        project = Project.all_offspring.find { |p| p.name == project_name }
-        puts project.backers.values.first.inspect
-        puts "Project Name: #{project.name}"
-        puts "Amount Remaining: $#{project.amount}"
-        check_goal(project)
-        puts "BACKERS:"
-        project.backers.each do |backer|
-          puts "Backer #{backer[1].name}, Amount: $#{backer[1].amount}"
+        if !Project.project_exists?(project_name, @projects)
+          project = Project.all_offspring.find { |p| p.name == project_name }
+          puts "Project Name: #{project.name}"
+          puts "Amount Remaining: $#{project.amount}"
+          check_goal(project)
+          puts "BACKERS:"
+          project.backers.each do |backer|
+            puts "Backer #{backer[1].name}, Amount: $#{backer[1].amount}"
+          end
+        else
+          puts "ERROR: Project does not exist.\n\n"
+          Display.help
         end
       end
 

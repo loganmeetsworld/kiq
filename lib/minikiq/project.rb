@@ -20,7 +20,7 @@ module Minikiq
         name = project[1]
         amount = project[2]
 
-        return self.check_input_length(project) && self.project_exists?(project, projects) && self.check_amount_dollar_sign(amount) && self.check_name_characters(type, name) && self.check_name_length(type, name)
+        return self.check_input_length(project) && self.project_exists?(project, projects) && self.check_amount_dollar_sign(amount) && self.check_name_characters(name) && self.check_name_length(name)
       end
 
       def self.project_exists?(project, projects)
