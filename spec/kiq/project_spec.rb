@@ -21,7 +21,7 @@ RSpec.describe Kiq::CLI::Project do
       end
 
       it 'returns false if a project does not exist' do
-        expect(Kiq::CLI::Project.project_does_not_exist?(bad_project, projects)).to eq false
+        expect(Kiq::CLI::Project.project_does_not_exist?(bad_project, projects)).to eq nil
       end
     end
 
