@@ -10,7 +10,7 @@ kiq is a crowd funding application that can be run from your command line. This 
 * Getting over my Rails addiction to lovely built in libraries and methods.
 
 ## Installation
-This is a Ruby Gem! It can be found on the rubygems site [here](https://rubygems.org/gems/kiq) and easily implemented on any operating system that has Ruby installed with the command `gem install kiq`.  
+This is a Ruby Gem (Yeah, it's crazy to me that I got this namespacing as well)! It can be found on the rubygems site [here](https://rubygems.org/gems/kiq) and easily implemented on any operating system that has Ruby installed with the command `gem install kiq`.  
 
 I tested this gem out on OSX El Capitan, Yosemite, Microsoft 10, and Linux. Just make sure you have [https://www.ruby-lang.org/en/documentation/installation/](Ruby installed on your OS). RubyGems comes with a Ruby installation.  
 
