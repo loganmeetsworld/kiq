@@ -1,4 +1,5 @@
 module Minikiq
+  # Displays help to the user
   class Display
     # Returns the full help center
     # @return [String]

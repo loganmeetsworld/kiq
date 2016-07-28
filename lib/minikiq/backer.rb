@@ -1,5 +1,6 @@
 module Minikiq
   module CLI
+    # Hosts logic for the backer object
     class Backer
       @@instance_collector = []
       attr_accessor :name, :credit_card, :amount

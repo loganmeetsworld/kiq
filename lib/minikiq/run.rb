@@ -7,6 +7,7 @@ require 'minikiq/helpers/display'
 module Minikiq
   FILE = File.expand_path('.minikiq')
   module CLI
+    # Runs the program when the user types 'minikiq'
     class Run
       # Initialize the Run with a projects hash and load the file
       def initialize

@@ -1,5 +1,6 @@
 module Minikiq
   module CLI
+    # Hosts logic for the backer object
     class Project
       @@instance_collector = []
       attr_accessor :name, :amount, :backers
@@ -31,7 +32,7 @@ module Minikiq
         name = project[1]
         amount = project[2]
 
-        return self.input_length(project) && self.project_does_not_exist?(project, projects) && self.check_amount_dollar_sign(amount) && self.check_name_characters(name) && self.check_name_length(name)
+        return self.check_input_length(project) && self.project_does_not_exist?(project, projects) && self.check_amount_dollar_sign(amount) && self.check_name_characters(name) && self.check_name_length(name)
       end
 
       # @param project [Array] the user input for project
