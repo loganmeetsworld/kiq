@@ -1,5 +1,5 @@
 
-Minikiq [![Build Status](https://travis-ci.org/loganmeetsworld/minikiq.svg?branch=master)](https://travis-ci.org/loganmeetsworld/minikiq) [![Gem Version](https://badge.fury.io/rb/minikiq.svg)](https://badge.fury.io/rb/minikiq) [![Inline docs](http://inch-ci.org/github/loganmeetsworld/minikiq.svg?branch=master)](http://inch-ci.org/github/loganmeetsworld/minikiq)
+Minikiq [![Build Status](https://travis-ci.org/loganmeetsworld/minikiq.svg?branch=master)](https://travis-ci.org/loganmeetsworld/minikiq) [![Gem Version](https://badge.fury.io/rb/minikiq.svg)](https://badge.fury.io/rb/minikiq) [![Inline docs](http://inch-ci.org/github/loganmeetsworld/minikiq.svg?branch=master)](http://inch-ci.org/github/loganmeetsworld/minikiq) [![Code Climate](https://codeclimate.com/github/loganmeetsworld/minikiq/badges/gpa.svg)](https://codeclimate.com/github/loganmeetsworld/minikiq)
 =========
 
 ## Summary
