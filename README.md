@@ -72,7 +72,7 @@ Backed Awesome_Sauce for $50 dollars.
 ### Serialization
 I used serialization with a yaml file for storage and made it human-readbale. This helped me not only organize the data but visualize it as it updated. If this project were bigger and had more objects I would want to use a relational database. However, with just two models, Projects and Backers, a hash to handle the Backers worked out well. It also really helped to be able to read the collection of projects from the file. 
 
-### Hash Useage
+### Hash Usage
 I employed several hashes for O(1) access. Projects are stored as a hash with the name as the accessor. Backers are stored as a hash with the credit card as the accessor. I know projects weren't required to have unique names, but I built that into the app and it made it easier to assess if a project existed or not. 
 
 ## To Do (if only there was more time)
