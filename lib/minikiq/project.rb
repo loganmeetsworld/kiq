@@ -29,7 +29,6 @@ module Minikiq
       # Calls all validation methods for a given project
       # @return [Boolean]
       def self.validate_project(project, projects)
-        type = project[0]
         name = project[1]
         amount = project[2]
 

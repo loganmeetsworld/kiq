@@ -127,8 +127,6 @@ module Minikiq
         end
       end
 
-      private
-
       # @param credit_card [String]
       # Computes Luhn-10 algorithm
       # @return [Boolean]
