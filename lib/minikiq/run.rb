@@ -16,8 +16,8 @@ module Minikiq
         load_projects
       end
 
-      # Takes in user input
-      # Returns help documentation or handles valid input
+      # Uses user input
+      # @return [String] help documentation or handles valid input
       def perform
         user_input      = ARGV
         primary_command = user_input[0]
@@ -58,7 +58,7 @@ module Minikiq
         end
       end
 
-      # Add a project object
+      # @param project [Array]
       # Returns successful message if project added
       # Returns help if add is unsuccessful
       def add(project)
@@ -75,9 +75,12 @@ module Minikiq
         end
       end
 
-      # Backs a project, adds a Backer object
-      # Returns successful message if user input is valid
-      # Returns help if back is unsuccessful
+      # @param type [String]
+      # @param backer_name [String]
+      # @param project_name [String]
+      # @param credit_card [String]
+      # @param amount [String]
+      # @return [String] successful message if user input is valid, help if back is unsuccessful
       def back(type, backer_name, project_name, credit_card, amount)
         project = @projects[project_name]
         if Backer.validate_project_exists(project) && Backer.validate_card(project, credit_card) && Backer.validate_backer_name(backer_name) && Backer.check_amount_dollar_sign(amount)
@@ -91,9 +94,9 @@ module Minikiq
         end
       end
 
+      # @param project_name [String]
       # If Project instance exists, lists all backers for a certain project
-      # Returns backers
-      # Returns Error and help if project does not exist
+      # @return [String] of backers, or error and help if project does not exist
       def list(project_name)
         if !Project.project_does_not_ exist?(['project', project_name], @projects)
           project = Project.all_offspring.find { |p| p.name == project_name }
@@ -110,9 +113,9 @@ module Minikiq
         end
       end
 
+      # @param backer_name [String]
       # Lists projects backed by a certain backer
-      # Returns Backed projects if any
-      # Returns nil if no backers
+      # @return [String] of projects, or nothing if none exist
       def backer(backer_name)
         @projects.each do |project|
           project[1].backers.each do |backer|
@@ -162,7 +165,7 @@ module Minikiq
       end
 
       # Checks if project amount has met the goal
-      # Returns success message if goal met
+      # @return [String] success message if goal met, else returns nothing
       def check_goal(project)
         if project.amount.to_i <= 0
           puts "Reached goal!"
