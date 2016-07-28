@@ -1,5 +1,7 @@
 module Minikiq
   class Display
+    # Returns the full help center
+    # @return [String]
     def self.help
       Minikiq::TITLE_HASH.keys.each do |key|
         puts key
@@ -16,6 +18,9 @@ module Minikiq
       puts "\n"
     end
 
+    # @param command [String]
+    # Returns the command help center
+    # @return [String]
     def self.command_help(command)
       puts 'NAME'
       puts Minikiq::SPACES + Minikiq::TITLE_HASH['NAME']
