@@ -4,9 +4,11 @@ module Minikiq
       @@instance_collector = []
       attr_accessor :name, :amount, :backers
 
+      # @param name [String]
+      # @param amount [String]
+      # @param backers [Hash]
+      # @instance_collector [Array]
       # Initialize a project object with name and amount
-      # Sets backers to empty default
-      # Collects instantiated objects
       def initialize(name, amount, backers={})
         @name = name
         @amount = amount
