@@ -26,6 +26,8 @@ And then you're off! If you ever want to remove the `.kiq` yaml file, delete it 
 If you're interesting in developing with the code, use git to clone this repo:  
 `git clone https://github.com/loganmeetsworld/kiq.git`
 
+The tests can be run from the terminal with the command `rspec`. This repo is also set up with Travis CI, so you can see the build status [here](https://travis-ci.org/loganmeetsworld/kiq). 
+
 ## Sample Input and Output
 ```
 > kiq project Awesome_Sauce 500  
