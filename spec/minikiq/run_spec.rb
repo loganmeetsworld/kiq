@@ -11,7 +11,7 @@ RSpec.describe Minikiq::CLI::Run do
     projects = { 'RandomProject' => Minikiq::CLI::Project.all_offspring.first }
 
     it 'adds a project' do
-      expect(Minikiq::CLI::Project.project_exists?('RandomProject', projects)).to eq true
+      expect(Minikiq::CLI::Project.project_does_not_exist?('RandomProject', projects)).to eq true
     end
   end
 end

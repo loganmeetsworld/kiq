@@ -94,7 +94,7 @@ module Minikiq
       # Returns backers
       # Returns Error and help if project does not exist
       def list(project_name)
-        if !Project.project_exists?(['project', project_name], @projects)
+        if !Project.project_does_not_ exist?(['project', project_name], @projects)
           project = Project.all_offspring.find { |p| p.name == project_name }
           puts "Project Name: #{project.name}"
           puts "Amount Remaining: $#{project.amount}"

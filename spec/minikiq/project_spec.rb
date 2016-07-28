@@ -10,18 +10,18 @@ RSpec.describe Minikiq::CLI::Project do
   end
 
   context 'validating a project' do
-    describe 'self.project_exists?(project, projects)' do
+    describe 'self.project_does_not_exist?(project, projects)' do
       Minikiq::CLI::Project.new('Test', '300', {})
       projects = {'Test' => Minikiq::CLI::Project.all_offspring.first}
       good_project = ['project', 'NotTest']
       bad_project = ['project', 'Test']
 
       it 'returns true if a project does not exist' do
-        expect(Minikiq::CLI::Project.project_exists?(good_project, projects)).to eq true
+        expect(Minikiq::CLI::Project.project_does_not_exist?(good_project, projects)).to eq true
       end
 
       it 'returns false if a project does not exist' do
-        expect(Minikiq::CLI::Project.project_exists?(bad_project, projects)).to eq false
+        expect(Minikiq::CLI::Project.project_does_not_exist?(bad_project, projects)).to eq false
       end
     end
 
