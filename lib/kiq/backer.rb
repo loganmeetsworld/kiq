@@ -1,4 +1,4 @@
-module Minikiq
+module Kiq
   module CLI
     # Hosts logic for the backer object
     class Backer

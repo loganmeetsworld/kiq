@@ -1,11 +1,11 @@
-require 'minikiq/helpers/version'
+require 'kiq/helpers/version'
 
 # Contains all relevant constants for displaying information
-module Minikiq
+module Kiq
   TITLE_HASH = {
-    'NAME' => "Minikiq: a command line interface for backing Kickstarter projects.\n\n",
-    'SYNOPSIS' => "minikiq [command] [arguments...]\n\n",
-    'VERSION' => "#{Minikiq::VERSION}\n\n"
+    'NAME' => "kiq: a command line interface for backing Kickstarter projects.\n\n",
+    'SYNOPSIS' => "kiq [command] [arguments...]\n\n",
+    'VERSION' => "#{Kiq::VERSION}\n\n"
   }
   COMMAND_HASH = {
     'list' => ['     - Display a project including backers and backed amounts', '[project name]'],

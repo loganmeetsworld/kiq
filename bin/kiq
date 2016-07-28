@@ -6,6 +6,6 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'minikiq/run'
+require 'kiq/run'
 
-Minikiq::CLI::Run.new.perform
+Kiq::CLI::Run.new.perform

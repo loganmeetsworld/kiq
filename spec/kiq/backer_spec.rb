@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-RSpec.describe Minikiq::CLI::Backer do
-  let(:backer) { Minikiq::CLI::Backer }
+RSpec.describe Kiq::CLI::Backer do
+  let(:backer) { Kiq::CLI::Backer }
   context 'validate a project' do
     describe '#self.validate_project_exists(project)' do
-      project =  Minikiq::CLI::Project.new('Test', '300', {})
+      project =  Kiq::CLI::Project.new('Test', '300', {})
       non_existant_project = nil
       it 'returns true if a project exists' do
         expect(backer.validate_project_exists(project)).to eq true
@@ -17,8 +17,8 @@ RSpec.describe Minikiq::CLI::Backer do
 
   context 'validate a card' do
     describe 'self.check_card_uniqueness(project, credit_card)' do
-      project =  Minikiq::CLI::Project.new('Test', '300', {})
-      project_backer = Minikiq::CLI::Backer.new('Jane', '4000', '5555555555554444')
+      project =  Kiq::CLI::Project.new('Test', '300', {})
+      project_backer = Kiq::CLI::Backer.new('Jane', '4000', '5555555555554444')
       project.backers = {"5555555555554444"=> project_backer}
       credit_card = "5555555555554444"
 

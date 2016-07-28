@@ -1,13 +1,13 @@
 require 'yaml'
-require 'minikiq/project'
-require 'minikiq/backer'
-require 'minikiq/helpers/constants'
-require 'minikiq/helpers/display'
+require 'kiq/project'
+require 'kiq/backer'
+require 'kiq/helpers/constants'
+require 'kiq/helpers/display'
 
-module Minikiq
-  FILE = File.expand_path('.minikiq')
+module Kiq
+  FILE = File.expand_path('.kiq')
   module CLI
-    # Runs the program when the user types 'minikiq'
+    # Runs the program when the user types 'kiq'
     class Run
       # Initialize the Run with a projects hash and load the file
       def initialize
@@ -27,7 +27,7 @@ module Minikiq
         when *valid_commands
           handle(user_input)
         when '-v'
-          puts Minikiq::VERSION
+          puts Kiq::VERSION
         when nil
           Display.help
         when '--help'
@@ -131,7 +131,7 @@ module Minikiq
       # Accessor for the project list file
       # Returns the file path
       def file
-        @file ||= File.exist?(FILE) ? FILE : '.minikiq'
+        @file ||= File.exist?(FILE) ? FILE : '.kiq'
       end
 
       # Creates a new project file if none exists
